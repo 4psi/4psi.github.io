@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>✞ Thisco</title>
+  <title>Thisco</title>
   <link rel="icon" type="image/png" href="https://cdn.discordapp.com/attachments/1127469524204138496/1134416416653705316/healavatar_pTHojyJ9.png">
   <style>
     body {
@@ -16,21 +16,11 @@
       font-family: Arial, sans-serif;
       cursor: url(knife.cur), auto;
       overflow: hidden;
-    }
-
-    .background-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-    }
-
-    .background-video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.60), rgba(0, 0, 0, 0.60)), url('https://cdn.discordapp.com/attachments/1128462894447743076/1129145603834785952/image0.gif');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
     }
 
     .profile-container {
@@ -75,31 +65,66 @@
       }
     }
 
-    .enter-button {
-      border: none;
+    .click-anywhere-message {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 12pt;
       cursor: pointer;
-      background: none;
-      color: #000;
-      font-size: 36px;
-      animation: fadeLoop 2s infinite;
     }
 
-    /* Rest of your styles */
+    /* Other styles... */
   </style>
+</head>
+<body>
+  <audio id="audioPlayer">
+    <source src="" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+  
+  <div class="background-container">
+    <div class="click-anywhere-message" id="enterButton">
+      <h4>[Click Anywhere]</h4>
+    </div>
+    
+    <div class="p-10" style="display: none;">
+      <div class="profile-container">
+        <div class="profile-pic"></div>
+        <h2 class="text-[20px] text-white font-semibold" style="color: #fff; background-image: url('https://media.discordapp.net/attachments/987149728800198686/991834200309248070/sparkle.gif');filter: drop-shadow(8px 8px 10px #050a07);color:#050a07;">thisco</h2>
+        <div class="description">
+          <p></p>
+          <pre><span id="evanyx"></span></pre>
+          <pre><span id="xdf"></span></pre>
+          <pre><span id="xct"></span></pre>
+          <pre><span id="thiscock"></span></pre>
+          <a href="https://github.com/thiscoreal" target="_blank">
+            <img src="https://feds.lol/module/newww/icons/github.svg" style="width: 40px; height: 40px;">
+          </a>
+          <p></p>
+        </div>
+        <div class="discord-widget">
+          <a href="https://discord.com/users/1107490855788490762" target="_blank">
+            <img src="https://discord.c99.nl/widget/theme-4/1107490855788490762.png" style="width: 300px;">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // Disable right-click and inspect element
     document.addEventListener('contextmenu', event => event.preventDefault());
     document.onkeydown = function (e) {
-      if (e.keyCode == 123) return false; // Disable F12 key
-      if (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) return false; // Disable Ctrl+Shift+I and Ctrl+Shift+J
-      if (e.ctrlKey && e.keyCode == 85) return false; // Disable Ctrl+U
+      if (e.keyCode == 123) return false;
+      if (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) return false;
+      if (e.ctrlKey && e.keyCode == 85) return false;
     };
 
     document.addEventListener('DOMContentLoaded', () => {
       const audioPlayer = document.getElementById('audioPlayer');
       const enterButton = document.getElementById('enterButton');
       const titleElement = document.querySelector('title');
-      const backgroundVideo = document.querySelector('.background-video');
 
       audioPlayer.src = 'thisco.mp3';
       audioPlayer.play().catch(error => {
@@ -107,10 +132,9 @@
       });
 
       const titles = [
-        "im thiscock",
-        "evanyx on top",
-        "xdfday runs you",
-        "xct on top"
+        "#evanyx",
+        "/pretty",
+        "@Thisco"
       ];
 
       let currentIndex = 0;
@@ -121,7 +145,7 @@
         currentIndex = (currentIndex + 1) % titles.length;
       }, 2000);
 
-      enterButton.addEventListener('click', () => {
+      document.addEventListener('click', () => {
         if (!isMusicPlaying) {
           audioPlayer.src = 'song.mp3';
           audioPlayer.play().catch(error => {
@@ -130,57 +154,10 @@
           isMusicPlaying = true;
         }
 
-        backgroundVideo.play(); // Play the video background
-        enterButton.style.animation = 'fadeInOut 2s infinite';
         enterButton.style.display = 'none';
         document.querySelector('.p-10').style.display = 'block';
       });
-
-      backgroundVideo.addEventListener('click', () => {
-        backgroundVideo.play();
-        audioPlayer.play();
-      });
     });
   </script>
-</head>
-<body>
-  <div class="background-container">
-    <video class="background-video" loop muted>
-      <source src="background.mp4" type="video/mp4">
-      Your browser does not support the video element.
-    </video>
-  </div>
-
-  <button class="h-20 p-4 flex items-center justify-center enter-button" id="enterButton">
-    <span>✞</span>
-  </button>
-
-  <div class="p-10" style="display: none;">
-    <div class="profile-container">
-      <div class="profile-pic"></div>
-      <h2 class="text-[20px] text-white font-semibold" style="color: #fff; background-image: url('https://media.discordapp.net/attachments/987149728800198686/991834200309248070/sparkle.gif');filter: drop-shadow(8px 8px 10px #050a07);color:#050a07;">thisco</h2>
-      <div class="description">
-        <p></p>
-        <pre><span id="evanyx"></span></pre>
-        <pre><span id="xdf"></span></pre>
-        <pre><span id="xct"></span></pre>
-        <pre><span id="thiscock"></span></pre>
-        <a href="https://github.com/thiscoreal" target="_blank">
-          <img src="https://feds.lol/module/newww/icons/github.svg" style="width: 40px; height: 40px;">
-        </a>
-        <p></p>
-      </div>
-      <div class="discord-widget">
-        <a href="https://discord.com/users/1107490855788490762" target="_blank">
-          <img src="https://discord.c99.nl/widget/theme-4/1107490855788490762.png" style="width: 300px;">
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <audio id="audioPlayer">
-    <source src="" type="audio/mpeg"> <!-- Empty source for preloading -->
-    Your browser does not support the audio element.
-  </audio>
 </body>
 </html>
