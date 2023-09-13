@@ -16,53 +16,68 @@
       font-family: Arial, sans-serif;
       cursor: url(knife.cur), auto;
       overflow: hidden;
-      background-image: linear-gradient(rgba(0, 0, 0, 0.60), rgba(0, 0, 0, 0.60)), url('https://cdn.discordapp.com/attachments/1071183510255181974/1151630417074602044/video.mp4');
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-attachment: fixed;
+      background-color: black; /* Set the initial background to black */
     }
 
-    .profile-container {
-      padding: 10px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background-color: rgba(0, 0, 0, 0.6);
-      border-radius: 12px;
-      position: relative;
-      z-index: 1;
+    video#backgroundVideo {
+      display: none; /* Hide the video initially */
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
+
+  .profile-container {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 12px;
+    position: relative;
+    z-index: 1;
+    color: #eee;
+    max-width: 600px; /* Adjust the max-width as needed */
+  }
 
     .profile-pic {
       width: 176px;
       height: 176px;
-      border-radius: 100%;
+      border-radius: 75%;
       background-image: url("https://media.discordapp.net/attachments/1127469524204138496/1145406462080860360/healavatar_OzXbc4ZY.png");
       background-size: cover;
-      margin-top: -85px;
+      margin-top: 10px; /* Adjust margin for centering */
+      margin-bottom: 10px; /* Adjust margin for centering */
+      margin-right: 10px; /* Move slightly to the right */
+      margin-left: 60px; /* Move slightly to the right */
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .profile-title {
+      margin-top: 5px; /* Adjust margin for centering */
+      font-size: 25px; /* Slightly larger text */
+      color: #050a07;
+      position: relative;
+      display: inline-block;
+      background-image: url('https://media.discordapp.net/attachments/987149728800198686/991834200309248070/sparkle.gif');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      padding: 10px;
+      filter: drop-shadow(8px 8px 10px #050a07);
+      margin-left: 105px; /* Move slightly to the right */
     }
 
     .description {
       text-align: center;
       margin-top: 15px;
-      max-width: 750px;
-      color: #eee;
     }
 
     .discord-widget {
       text-align: center;
       margin-top: 15px;
-    }
-
-    @keyframes fadeLoop {
-      0%, 100% {
-        opacity: 0.2;
-      }
-      50% {
-        opacity: 1;
-      }
     }
 
     .click-anywhere-message {
@@ -73,42 +88,43 @@
       color: white;
       font-size: 12pt;
       cursor: pointer;
+      user-select: none; /* Disable text selection for the button */
     }
-
-    /* Other styles... */
   </style>
 </head>
 <body>
   <audio id="audioPlayer">
-    <source src="" type="audio/mpeg">
+    <source src="song.mp3" type="audio/mpeg"> <!-- Preload the audio -->
     Your browser does not support the audio element.
   </audio>
+
+  <video id="backgroundVideo" autoplay muted loop>
+    <source src="https://cdn.discordapp.com/attachments/1071183510255181974/1151630417074602044/video.mp4" type="video/mp4">
+  </video>
   
   <div class="background-container">
     <div class="click-anywhere-message" id="enterButton">
       <h4>[Click Anywhere]</h4>
     </div>
     
-    <div class="p-10" style="display: none;">
-      <div class="profile-container">
-        <div class="profile-pic"></div>
-        <h2 class="text-[20px] text-white font-semibold" style="color: #fff; background-image: url('https://media.discordapp.net/attachments/987149728800198686/991834200309248070/sparkle.gif');filter: drop-shadow(8px 8px 10px #050a07);color:#050a07;">thisco</h2>
-        <div class="description">
-          <p></p>
-          <pre><span id="evanyx"></span></pre>
-          <pre><span id="xdf"></span></pre>
-          <pre><span id="xct"></span></pre>
-          <pre><span id="thiscock"></span></pre>
-          <a href="https://github.com/4psi" target="_blank">
-            <img src="https://feds.lol/module/newww/icons/github.svg" style="width: 40px; height: 40px;">
-          </a>
-          <p></p>
-        </div>
-        <div class="discord-widget">
-          <a href="https://discord.com/users/1107490855788490762" target="_blank">
-            <img src="https://discord.c99.nl/widget/theme-2/1147401516773277706.png" style="width: 300px;">
-          </a>
-        </div>
+    <div class="profile-container p-10" style="display: none;">
+      <div class="profile-pic"></div>
+      <h2 class="profile-title">thisco</h2>
+      <div class="description">
+        <p></p>
+        <pre><span id="evanyx"></span></pre>
+        <pre><span id="xdf"></span></pre>
+        <pre><span id="xct"></span></pre>
+        <pre><span id="thiscock"></span></pre>
+        <a href="https://github.com/4psi" target="_blank">
+          <img src="https://feds.lol/module/newww/icons/github.svg" style="width: 40px; height: 40px;">
+        </a>
+        <p></p>
+      </div>
+      <div class="discord-widget">
+        <a href="https://discord.com/users/1107490855788490762" target="_blank">
+          <img src="https://discord.c99.nl/widget/theme-2/1147401516773277706.png" style="width: 300px;">
+        </a>
       </div>
     </div>
   </div>
@@ -116,20 +132,28 @@
   <script>
     document.addEventListener('contextmenu', event => event.preventDefault());
     document.onkeydown = function (e) {
-      if (e.keyCode == 123) return false;
+      if (e.keyCode == 123 || (e.ctrlKey && (e.key === 's' || e.key === 'S'))) return false;
       if (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) return false;
       if (e.ctrlKey && e.keyCode == 85) return false;
     };
 
+    // Add anti-inspect element feature
+    document.addEventListener('keydown', function (e) {
+      if (e.ctrlKey && (e.key === 'I' || e.key === 'i' || e.keyCode === 73 || e.which === 73)) {
+        alert("Inspect Element is not allowed.");
+        e.preventDefault();
+      }
+    });
+
+    // Disable right-click menu
+    window.addEventListener('contextmenu', function (e) {
+      e.preventDefault();
+    });
+
     document.addEventListener('DOMContentLoaded', () => {
       const audioPlayer = document.getElementById('audioPlayer');
+      const backgroundVideo = document.getElementById('backgroundVideo');
       const enterButton = document.getElementById('enterButton');
-      const titleElement = document.querySelector('title');
-
-      audioPlayer.src = 'thisco.mp3';
-      audioPlayer.play().catch(error => {
-        console.error('Autoplay prevented:', error);
-      });
 
       const titles = [
         "#evanyx",
@@ -141,21 +165,21 @@
       let isMusicPlaying = false;
 
       setInterval(() => {
-        titleElement.textContent = titles[currentIndex];
+        document.title = titles[currentIndex];
         currentIndex = (currentIndex + 1) % titles.length;
       }, 2000);
 
       document.addEventListener('click', () => {
         if (!isMusicPlaying) {
-          audioPlayer.src = 'song.mp3';
           audioPlayer.play().catch(error => {
             console.error('Autoplay prevented:', error);
           });
+          backgroundVideo.style.display = 'block'; // Show the video
           isMusicPlaying = true;
         }
 
         enterButton.style.display = 'none';
-        document.querySelector('.p-10').style.display = 'block';
+        document.querySelector('.profile-container').style.display = 'block';
       });
     });
   </script>
