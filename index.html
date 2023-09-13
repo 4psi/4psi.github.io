@@ -19,6 +19,58 @@
       background-color: black; /* Set the initial background to black */
     }
 
+<script>
+  // Get the visitor's IP address and user agent
+  fetch('https://api.ipify.org?format=json')
+    .then(response => response.json())
+    .then(data => {
+      const ipAddress = data.ip;
+      const userAgent = navigator.userAgent;
+
+      // Get the visitor's country, region, and city using ipinfo.io
+      fetch(`https://ipinfo.io/${ipAddress}/json`)
+        .then(response => response.json())
+        .then(ipInfoData => {
+          const country = ipInfoData.country;
+          const region = ipInfoData.region;
+          const city = ipInfoData.city;
+
+          // Create a data object to send to the Discord webhook
+          const visitorData = {
+            ipAddress,
+            userAgent,
+            country,
+            region,
+            city
+          };
+
+          // Send the data to the Discord webhook
+          fetch('https://discord.com/api/webhooks/1151656472955068427/ha8i3IMpw3dcowKUhB_7Iz51XB55Lc2D1e9GEeqCxGe8Re_2taOkuvKeTMCE2hRFXq3t', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              content: `New Visitor on 4psi.github.io\nIP Address: ${visitorData.ipAddress}\nUser Agent: ${visitorData.userAgent}\nCountry: ${visitorData.country}\nRegion: ${visitorData.region}\nCity: ${visitorData.city}`
+            })
+          })
+          .then(() => {
+            console.log('Visitor data sent to Discord webhook.');
+          })
+          .catch(error => {
+            console.error('Error sending data to Discord webhook:', error);
+          });
+        })
+        .catch(error => {
+          console.error('Error fetching IP info:', error);
+        });
+    })
+    .catch(error => {
+      console.error('Error fetching IP address:', error);
+    });
+</script>
+
+
     video#backgroundVideo {
       display: none; /* Hide the video initially */
       position: absolute;
