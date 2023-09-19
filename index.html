@@ -16,33 +16,16 @@
       font-family: Arial, sans-serif;
       cursor: url(knife.cur), auto;
       overflow: hidden;
-      background-color: black; /* Set the background to black */
     }
 
     video#backgroundVideo {
-      display: none; /* Hide the video initially */
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* Add the following CSS to make sure the video is hidden */
-    .background-container {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: -1; /* Place it behind other content */
-    }
-
-    .background-container video {
       object-fit: cover;
-      width: 100%;
-      height: 100%;
+      filter: grayscale(100%) brightness(0%); /* Make the video black and white with 0% brightness (black) */
     }
 
     /* Add the following CSS to hide the profile container initially */
@@ -50,18 +33,18 @@
       display: none;
     }
 
-  .profile-container {
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.6);
-    border-radius: 12px;
-    position: relative;
-    z-index: 1;
-    color: #eee;
-    max-width: 600px; /* Adjust the max-width as needed */
-  }
+    .profile-container {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 12px;
+      position: relative;
+      z-index: 1;
+      color: #eee;
+      max-width: 600px; /* Adjust the max-width as needed */
+    }
 
     .profile-pic {
       width: 176px;
@@ -119,32 +102,32 @@
     Your browser does not support the audio element.
   </audio>
 
-  <!-- Remove the video element -->
+  <video id="backgroundVideo" autoplay muted loop>
+    <source src="https://cdn.discordapp.com/attachments/1071183510255181974/1151630417074602044/video.mp4" type="video/mp4">
+  </video>
   
-  <div class="background-container">
-    <div class="click-anywhere-message" id="enterButton">
-      <h4>[Click Anywhere]</h4>
+  <div class="click-anywhere-message" id="enterButton">
+    <h4>[Click Anywhere]</h4>
+  </div>
+  
+  <div class="profile-container p-10" style="display: none;">
+    <div class="profile-pic"></div>
+    <h2 class="profile-title">thisco</h2>
+    <div class="description">
+      <p></p>
+      <pre><span id="evanyx"></span></pre>
+      <pre><span id="xdf"></span></pre>
+      <pre><span id="xct"></span></pre>
+      <pre><span id="thiscock"></span></pre>
+      <a href="https://github.com/4psi" target="_blank">
+        <img src="https://feds.lol/module/newww/icons/github.svg" style="width: 40px; height: 40px;">
+      </a>
+      <p></p>
     </div>
-    
-    <div class="profile-container p-10" style="display: none;">
-      <div class="profile-pic"></div>
-      <h2 class="profile-title">thisco</h2>
-      <div class="description">
-        <p></p>
-        <pre><span id="evanyx"></span></pre>
-        <pre><span id="xdf"></span></pre>
-        <pre><span id="xct"></span></pre>
-        <pre><span id="thiscock"></span></pre>
-        <a href="https://github.com/4psi" target="_blank">
-          <img src="https://feds.lol/module/newww/icons/github.svg" style="width: 40px; height: 40px;">
-        </a>
-        <p></p>
-      </div>
-      <div class="discord-widget">
-        <a href="https://discord.com/users/1107490855788490762" target="_blank">
-          <img src="https://discord.c99.nl/widget/theme-2/1117912133770952935.png" style="width: 300px;">
-        </a>
-      </div>
+    <div class="discord-widget">
+      <a href="https://discord.com/users/1107490855788490762" target="_blank">
+        <img src="https://discord.c99.nl/widget/theme-2/1117912133770952935.png" style="width: 300px;">
+      </a>
     </div>
   </div>
 
